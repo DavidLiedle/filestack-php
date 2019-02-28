@@ -1,31 +1,32 @@
+# Filestack PHP SDK
+
 [![Travis_ci Status](https://api.travis-ci.org/filestack/filestack-php.svg?branch=master)](https://travis-ci.org/filestack/filestack-php)
 [![Coverage Status](https://coveralls.io/repos/github/filestack/filestack-php/badge.svg?branch=master)](https://coveralls.io/github/filestack/filestack-php?branch=master)
 [![CodeClimate Status](https://codeclimate.com/github/filestack/filestack-php/badges/gpa.svg)](https://codeclimate.com/github/filestack/filestack-php)
 
-# Filestack PHP SDK
-<a href="https://www.filestack.com"><img src="https://filestack.com/themes/filestack/assets/images/press-articles/color.svg" align="left" hspace="10" vspace="6"></a>
 This is the official PHP SDK for Filestack - API and content management system that makes it easy to add powerful file uploading and transformation capabilities to any web or mobile application.
 
 ## Requirements
 
 * PHP 5.6+
+* PHP 7.0+
 
 ## Resources
 
-* [Filestack](https://www.filestack.com)
+* [Filestack](https://www.filestack.com/)
 * [Documentation](https://www.filestack.com/docs)
 
 ## Installing
 
 Install ``filestack`` with composer, either run
 
-    $ composer require --prefer-dist filestack/filestack-php
+    `composer require --prefer-dist filestack/filestack-php`
 
 ### Note on Installation
 
 You should use composer to install this package to your project, as it'll download all the needed dependencies.  Technically, you can manually include the Filestack library using the spl_autoload_register function like so:
 
-```
+```php
 <?php
 function my_autoloader($class) {
     include 'ext-lib\' . $class . '.php';
@@ -41,12 +42,12 @@ But, even though this will resolve all your Filestack paths, it'll still not wor
 
 If you really can't use composer, Below is an example project with all the vendor dependencies downloaded. Just make sure you include the vendor/autoload.php file wherever you need to call Filestack objects.
 
-```
+```php
 <?php
 require __DIR__ . '/vendor/autoload.php';
 ```
 
-https://www.dropbox.com/s/7iwritw0pcstwjb/filestack-phptest.zip
+[https://www.dropbox.com/s/7iwritw0pcstwjb/filestack-phptest.zip](https://www.dropbox.com/s/7iwritw0pcstwjb/filestack-phptest.zip)
 
 ## Usage
 
@@ -57,6 +58,7 @@ Filestack library gives you access to three useful classes:
 * `FileSecurity` - for applying policy and signature values to your API calls
 
 ### Uploading files
+
 First, you need to create an instance of FilestackClient
 
 ```php
@@ -74,6 +76,7 @@ $filelink = $client->upload('/path/to/file');
 ```
 
 ### Storage
+
 Amazon S3 is used to store your files by default. If you wish to use a different one, you can pass in additional parameter 'location' when making upload() and store calls
 
 ```php
@@ -104,8 +107,8 @@ $filelink2 = $client->overwrite('/path/to/file', $filelink->handle);
 
 Filelink objects can be created in two ways:
 
- - by uploading a file with using FilestackClient
- - by initializing Filelink with file handle and api_key
+* by uploading a file with using FilestackClient
+* by initializing Filelink with file handle and api_key
 
 First method was shown above, the second method is also very easy and will create objects representing files that were already uploaded.
 
@@ -182,7 +185,7 @@ retry strategy.
 Lastly, this feature has to be turned on for the apikey being used.  To turn
 on this feature please contact Filestack at support@filestack.com.
 
-```
+```php
 $client = new FilestackClient('YOUR_API_KEY');
 $filelink = $client->upload('/path/to/file', ['intelligent' => true]);
 ```
@@ -193,33 +196,38 @@ Filestack PHP SDK follows the [Semantic Versioning](http://semver.org/).
 
 ## Code Standard
 
-- PSR-2 coding standard (http://www.php-fig.org/psr/psr-2/)
-- PSR-4 autoloading standard (http://www.php-fig.org/psr/psr-4/)
-- phpDoc documentation comments standard (https://www.phpdoc.org/docs/latest/getting-started/your-first-set-of-documentation.html)
+* PSR-2 coding standard (http://www.php-fig.org/psr/psr-2/)
+* PSR-4 autoloading standard (http://www.php-fig.org/psr/psr-4/)
+* phpDoc documentation comments standard (https://www.phpdoc.org/docs/latest/getting-started/your-first-set-of-documentation.html)
 
 ## Testing
 
-- To run tests, from the project root director, run
-```
+* To run tests, from the project root directory, run
+
+```shell
 vendor/bin/phpunit
 ```
 
-- To generate coverage report, run following command (will generage html files under
+* To generate coverage report, run following command (will generage html files under
 directory coverage/)
-```
+
+```shell
 vendor/bin/phpunit --coverage-html=coverage
 ```
 
-- To run PHPMD for CodeClimate checks
-```
+* To run PHPMD for CodeClimate checks
+
+```shell
 vendor/bin/phpmd filestack xml phpmd-rules.xml > logs/phpmd-report-filestack.xml
 vendor/bin/phpmd tests xml phpmd-rules.xml > logs/phpmd-report-tests.xml
 ```
 
 ## Generating documentation
 
+```shell
 vendor/bin/phploc --log-xml=phploc.xml filestack
 vendor/bin/phpdox
+```
 
 ## Issues
 

@@ -1,8 +1,11 @@
 language: php
 
 php:
-  - 5.6
-  - 7.0
+  - '5.6' # Official PHP Support ended 31 Dec 2018
+  - '7.0' # Official PHP Support ended 10 Jan 2019
+  - '7.1' # Official PHP Support ended 1 Dec 2019
+  - '7.2' # Official PHP Support through 30 Nov 2020
+  - '7.3' # Official PHP Support through 6 Dec 2021
 
 before_script:
   - composer self-update

@@ -1,15 +1,18 @@
 <?php
+
 namespace Filestack;
 
 use GuzzleHttp\Client;
 use Filestack\FilestackConfig;
 use Filestack\UploadProcessor;
 
+use Filestack\FilestackClientInterface;
+
 /**
  * Filestack client object.  This is the main object to
  * make functional calls to the Filestack API.
  */
-class FilestackClient
+class FilestackClient implements FilestackClientInterface
 {
     use Mixins\CommonMixin;
     use Mixins\TransformationMixin;
@@ -173,8 +176,15 @@ class FilestackClient
      *
      * @return Filestack/Filelink or contents
      */
-    public function collage($sources, $width, $height, $store_options = [],
-        $color = 'white', $fit = 'auto', $margin = 10, $auto_rotate = false)
+    public function collage( $sources,
+                             $width,
+                             $height,
+                             $store_options = [],
+                             $color         = 'white',
+                             $fit           = 'auto',
+                             $margin        = 10,
+                             $auto_rotate   = false
+                           )
     {
 
         // slice off first source as the filelink
@@ -270,7 +280,11 @@ class FilestackClient
      *
      * @return string (uuid of conversion task)
      */
-    public function convertAudio($resource, $format, $options = [], $force = false)
+    public function convertAudio( $resource,
+                                  $format,
+                                  $options = [],
+                                  $force   = false
+                                )
     {
         $transform_tasks = [
             'video_convert' => $options
@@ -355,7 +369,10 @@ class FilestackClient
      *
      * @return Filestack/Filelink
      */
-    public function convertFile($resource, $filetype, $options = [])
+    public function convertFile( $resource,
+                                 $filetype,
+                                 $options = []
+                                )
     {
         $transform_tasks = [
             'output' => $options
@@ -478,7 +495,11 @@ class FilestackClient
      *
      * @return string (uuid of conversion task)
      */
-    public function convertVideo($resource, $format, $options = [], $force = false)
+    public function convertVideo( $resource,
+                                  $format,
+                                  $options = [],
+                                  $force   = false
+                                 )
     {
         $transform_tasks = [
             'video_convert' => $options
@@ -600,8 +621,14 @@ class FilestackClient
      *
      * @return Filestack/Filelink
      */
-    public function screenshot($url, $store_options = [],
-        $agent = 'desktop', $mode = 'all', $width = 1024, $height = 768, $delay = 0)
+    public function screenshot( $url,
+                                $store_options = [],
+                                $agent         = 'desktop',
+                                $mode          = 'all',
+                                $width         = 1024,
+                                $height        = 768,
+                                $delay         = 0
+                               )
     {
         $process_attrs = [
             'a' => $agent,
@@ -797,4 +824,5 @@ class FilestackClient
         $result = $this->sendTransform($sources_str, $transform_tasks, $this->security);
         return $result;
     }
-}
+
+} // End of class FilestackClient

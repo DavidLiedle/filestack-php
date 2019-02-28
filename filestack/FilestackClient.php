@@ -1,15 +1,18 @@
 <?php
+
 namespace Filestack;
 
 use GuzzleHttp\Client;
 use Filestack\FilestackConfig;
 use Filestack\UploadProcessor;
 
+use Filestack\FilestackClientInterface;
+
 /**
  * Filestack client object.  This is the main object to
  * make functional calls to the Filestack API.
  */
-class FilestackClient
+class FilestackClient implements FilestackClientInterface
 {
     use Mixins\CommonMixin;
     use Mixins\TransformationMixin;
